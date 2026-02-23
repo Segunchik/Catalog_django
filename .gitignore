@@ -16,6 +16,7 @@
 __pycache__/
 .venv
 env
+.env
 sqlite
 # OS or Editor folders
 ._*
