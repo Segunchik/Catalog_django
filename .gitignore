@@ -13,6 +13,12 @@
 *.zip
 *~
 
+__pycache__/
+__pycache__
+.venv
+env
+.env
+sqlite
 # OS or Editor folders
 ._*
 .cache
