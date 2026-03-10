@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
                 (
                     "product_image",
                     models.ImageField(
-                        blank=True, null=True, upload_to="catalog/images", verbose_name="Изображение продукта"
+                        blank=True, null=True, upload_to="images/", verbose_name="Изображение продукта"
                     ),
                 ),
                 ("price", models.IntegerField()),

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'catalog/base.html' %}
 {% load my_tags %}
 {% block content %}
       <div class="album py-5 bg-body-tertiary">
@@ -6,12 +6,12 @@
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <div class="col">
               <div class="card shadow-sm">
-                <img src="{{ product.product_image | media_filter }}" height="200">
+                <img src="{{ object.product_image | media_filter }}" height="200">
                 <div class="card-body">
-                    <h3>{{ product.product_name }}</h3>
-                    <h5>Цена: {{ product.price }}</h5>
+                    <h3>{{ object.product_name }}</h3>
+                    <h5>Цена: {{ object.price }}</h5>
                   <p class="card-text">
-                      {{ product.description }}
+                      {{ object.description }}
                   </p>
                   <div
                     class="d-flex justify-content-between align-items-center"

@@ -3,7 +3,7 @@ from catalog.models import Product, Category
 
 
 class Command(BaseCommand):
-    help = "Add product to the database"
+    help = "Add catalog to the database"
 
     # Удаляем существующие записи
     Product.objects.all().delete()
@@ -28,6 +28,6 @@ class Command(BaseCommand):
         for product_data in products:
             product, created = Product.objects.get_or_create(**product_data)
             if created:
-                self.stdout.write(self.style.SUCCESS(f"Successfully added product: {product.product_name}"))
+                self.stdout.write(self.style.SUCCESS(f"Successfully added catalog: {product.product_name}"))
             else:
                 self.stdout.write(self.style.WARNING(f"Product already exists: {product.product_name}"))
