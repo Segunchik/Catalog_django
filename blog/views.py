@@ -17,7 +17,7 @@ class PostsListView(ListView):
 class PostDetailView(DetailView):
     model = Posts
     template_name = "blog/post_detail.html"
-    success_url = reverse_lazy("blog:post_list")
+    success_url = reverse_lazy("blog:posts_list")
 
     def get_object(self, queryset = None):
         self.object = super().get_object(queryset)
