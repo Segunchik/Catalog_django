@@ -6,7 +6,7 @@ class Posts(models.Model):
     content = models.TextField(verbose_name='Содержимое поста', null=True, blank=True, help_text='Напишите содержимое поста')
     image = models.ImageField(upload_to='blog/images',null=True, blank=True, verbose_name='Превью поста')
     created_at = models.DateTimeField(auto_now_add=True)
-    is_publishing = models.BooleanField(default=True, verbose_name='Признак публикации', help_text='Признак публикации')
+    is_publishing = models.BooleanField(verbose_name='Признак публикации', help_text='Признак публикации')
     count_views = models.PositiveIntegerField(default=0, verbose_name='Количество просмотров',help_text='Количество просмотров')
 
     def __str__(self):
