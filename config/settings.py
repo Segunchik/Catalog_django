@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "catalog",
+    "blog",
 ]
 
 MIDDLEWARE = [
@@ -38,7 +39,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-#    'django.contrib.staticfiles.middleware.StaticFilesMiddleware',
+    #    'django.contrib.staticfiles.middleware.StaticFilesMiddleware',
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -107,10 +108,10 @@ USE_TZ = True
 # STATIC_ROOT = BASE_DIR / 'staticfiles'
 # STATICFILES_DIRS = [BASE_DIR / "static"]
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Путь для сбора статических файлов
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # Папка с вашими статическими файлами
+    os.path.join(BASE_DIR, "static"),  # Папка с вашими статическими файлами
 ]
 
 MEDIA_URL = "media/"
