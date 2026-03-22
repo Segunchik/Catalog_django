@@ -1,5 +1,4 @@
 from django.urls import path
-from django.views.generic import RedirectView
 
 from catalog.apps import CatalogConfig
 from catalog.views import (
