@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
 from .forms import ProductForm
@@ -10,10 +11,12 @@ class ProductListView(ListView):
     template_name = "catalog/product_list.html"
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = "catalog/product_detail.html"
     context_object_name = "product"
+    login_url = 'users:login'  # имя URL с пространством имён
+    redirect_field_name = 'next'
 
 
 class ProductCreateView(CreateView):
