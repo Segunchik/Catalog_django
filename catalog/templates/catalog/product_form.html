@@ -8,6 +8,7 @@
                     <div class="card-body">
                         {% csrf_token %}
                         {{ form.as_p }}
+                        <h5>Владелец {{ object.owner }}</h5>
                         <button type="submit" class="btn btn-primary">
                             {% if object %}
                             Сохранить
@@ -15,7 +16,8 @@
                             Добавить
                             {% endif %}
                         </button>
-                        {% if object %}
+
+
                             <a href="{% url 'catalog:product_confirm_delete' product.pk %}">
                               <button
                                 type="button"
@@ -24,7 +26,7 @@
                                 Удалить
                               </button>
                             </a>
-                        {% endif %}
+
                     </div>
                 </div>
             </form>
