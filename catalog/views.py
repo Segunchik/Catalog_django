@@ -53,10 +53,18 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         raise PermissionDenied("У вас нет полномочий редактировать")
 
 
-class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = "catalog/product_confirm_delete.html"
     success_url = reverse_lazy("catalog:product_list")
+    # permission_required = "catalog.delete_product"
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if not (self.object.owner == request.user or
+                request.user.has_perm("catalog.delete_product")):
+            raise PermissionDenied("У вас нет прав на удаление этого продукта.")
+        return super().dispatch(request, *args, **kwargs)
 
 
 class HomeView(TemplateView):
