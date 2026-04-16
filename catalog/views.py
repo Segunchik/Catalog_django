@@ -1,15 +1,21 @@
+from pprint import pprint
+
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
 from .forms import ProductForm, ProductModeratorForm, ProductModeratorOwnerForm, ProductSuperuserForm
 
-from catalog.models import Product
+from catalog.models import Product, Category
+from .services import get_products_from_cache, get_products_by_category
 
 
 class ProductListView(ListView):
     model = Product
     template_name = "catalog/product_list.html"
+
+    def get_queryset(self):
+        return get_products_from_cache()
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
@@ -61,8 +67,7 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
 
     def dispatch(self, request, *args, **kwargs):
         self.object = self.get_object()
-        if not (self.object.owner == request.user or
-                request.user.has_perm("catalog.delete_product")):
+        if not (self.object.owner == request.user or request.user.has_perm("catalog.delete_product")):
             raise PermissionDenied("У вас нет прав на удаление этого продукта.")
         return super().dispatch(request, *args, **kwargs)
 
@@ -73,3 +78,20 @@ class HomeView(TemplateView):
 
 class ContactsView(TemplateView):
     template_name = "catalog/contacts.html"
+
+
+class ProductsByCategoryView(ListView):
+    model = Product
+    template_name = "catalog/products_by_category.html"
+    context_object_name = "products"
+
+    def get_queryset(self):
+        category_id = self.kwargs["category_id"]
+        return get_products_by_category(category_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_id = self.kwargs.get("category_id")
+        pprint(category_id)
+        context["category"] = Category.objects.get(id=category_id)
+        return context
